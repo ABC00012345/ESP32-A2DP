@@ -338,9 +338,13 @@ class BluetoothA2DPCommon {
     avrc_rn_events = events;
   }
 
+  // added to access the peer address
+  esp_bd_addr_t peer_bd_addr;
+
+  int8_t curDeviceRSSI;
+
  protected:
   const char *bt_name = {0};
-  esp_bd_addr_t peer_bd_addr;
   ReconnectStatus reconnect_status = NoReconnect;
   unsigned long reconnect_timout = 0;
   unsigned int default_reconnect_timout = 10000;

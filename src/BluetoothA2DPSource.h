@@ -20,6 +20,7 @@
 #pragma once
 
 #include <vector>
+#include <Arduino.h>
 
 #include "BluetoothA2DPCommon.h"
 

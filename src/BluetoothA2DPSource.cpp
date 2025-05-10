@@ -460,6 +460,22 @@ void BluetoothA2DPSource::app_gap_callback(esp_bt_gap_cb_event_t event,
       ESP_LOGI(BT_AV_TAG, "ESP_BT_GAP_ENC_CHG_EVT");
       break;
 #endif
+    
+    case ESP_BT_GAP_READ_RSSI_DELTA_EVT: {
+        esp_bt_gap_cb_param_t::read_rssi_delta_param &rssi_param = param->read_rssi_delta;
+
+        char bda_str[18];
+        snprintf(bda_str, sizeof(bda_str), "%02X:%02X:%02X:%02X:%02X:%02X",
+                rssi_param.bda[0], rssi_param.bda[1], rssi_param.bda[2],
+                rssi_param.bda[3], rssi_param.bda[4], rssi_param.bda[5]);
+
+        Serial.print("RSSI for device ");
+        Serial.print(bda_str);
+        Serial.print(": ");
+        Serial.println(rssi_param.rssi_delta);
+        this->curDeviceRSSI = rssi_param.rssi_delta;
+        break;
+    }
 
     default: {
       ESP_LOGI(BT_AV_TAG, "event: %d", event);
